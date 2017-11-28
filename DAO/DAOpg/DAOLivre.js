@@ -37,7 +37,22 @@ class LivreDAOpg{
         });
 
     };
-    
+    getLivreById(id,cb){
+        const query={
+            name:'fetch-livre-by-id',
+            text:'select * from livre where code =$1',
+            values:[id]
+        }
+        this._client.query(query, function (err,result) {
+            if(err){
+                console.log(err.stack);
+            }else{
+                let leLivre = new Livre(id, result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
+                cb(leLivre)
+            }
+
+        })
+    }
 }
 
 module.exports = LivreDAOpg;
