@@ -1,12 +1,12 @@
 class Livre{
     constructor(unCode, unTitre, unResume,unIsbn){
-        this._code = unCode;
-        this._titre = unTitre;
-        this._resume = unResume;
-        this._isbn = unIsbn;
+        this.code = unCode;
+        this.titre = unTitre;
+        this.resume = unResume;
+        this.isbn = unIsbn;
     }
-    get titre(){
-        return this._titre;
-    }
+    // get titre(){
+    //     return this.titre;
+    // }
 }
 module.exports=Livre;

@@ -1,7 +1,7 @@
 const {Client} = require('pg');
 const Livre = require('../../model/livre');
 
-class LivreDAOpg{
+class DAOAndroid{
     constructor(){
         this._client = new Client({
             connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
@@ -25,7 +25,7 @@ class LivreDAOpg{
             } else {
                 let i = 0;
                 result.rows.forEach(function(row) {
-                    let unLivre = new Livre(result.rows[i]['code'], result.rows[i]['titre']);
+                    let unLivre = new Livre(result.rows[i]['code'], result.rows[i]['titre'],result.rows[i]['resume'], result.rows[i]['isbn']);
                     lesLivres.push(unLivre);
                     i++;
                 });
@@ -40,7 +40,7 @@ class LivreDAOpg{
     getLivreById(id,cb){
         const query={
             name:'fetch-livre-by-id',
-            text:'select * from livre where "idLivre" =$1',
+            text:'select * from livre where code =$1',
             values:[id]
         }
         this._client.query(query, function (err,result) {
@@ -55,4 +55,4 @@ class LivreDAOpg{
     }
 }
 
-module.exports = LivreDAOpg;
+module.exports = DAOAndroid;
