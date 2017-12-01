@@ -4,7 +4,7 @@ const Livre = require('../../model/livre');
 class DAOAndroid{
     constructor(){
         this._client = new Client({
-            connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
+            connectionString: 'postgres://sonnois:Bonjour@192.168.1.26:5432/biblio'
             // connectionString: process.ENV.DATABASE_URL
         });
         this._client.connect(function (err) {
@@ -25,7 +25,7 @@ class DAOAndroid{
             } else {
                 let i = 0;
                 result.rows.forEach(function(row) {
-                    let unLivre = new Livre(result.rows[i]['code'], result.rows[i]['titre'],result.rows[i]['resume'], result.rows[i]['isbn']);
+                    let unLivre = new Livre(result.rows[i]['idLivre'], result.rows[i]['titre'],result.rows[i]['resume'], result.rows[i]['isbn']);
                     lesLivres.push(unLivre);
                     i++;
                 });

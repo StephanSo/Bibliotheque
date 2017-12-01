@@ -1,6 +1,6 @@
 class Livre{
-    constructor(unCode, unTitre, unResume,unIsbn){
-        this.code = unCode;
+    constructor(unIdLivre, unTitre, unResume,unIsbn){
+        this.idLivre = unIdLivre;
         this.titre = unTitre;
         this.resume = unResume;
         this.isbn = unIsbn;

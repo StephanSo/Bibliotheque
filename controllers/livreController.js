@@ -1,5 +1,7 @@
 const LivreDAOpg = require('../DAO/DAOpg/DAOLivre');
 const livreDAOpg = new LivreDAOpg();
+const AuteurDAOpg = require('../DAO/DAOpg/DAOAuteur');
+const auteurDAOpg = new AuteurDAOpg();
 
 exports.listLivre = function (req,res,next) {
     livreDAOpg.getAllLivres(
@@ -11,7 +13,11 @@ exports.livreById = function (req, res, next) {
     let id = req.params.id;
     livreDAOpg.getLivreById(id,
         function (leLivre) {
-        res.render('catalogue/livre/livreDetail',{id, unLivre: leLivre})
+        auteurDAOpg.getAuteurByIdLivre(id,
+            function (lAuteur) {
+                res.render('catalogue/livre/livreDetail',{id, unLivre:leLivre, unAuteur: lAuteur})
+            })
+
 
         });
 };
