@@ -4,7 +4,7 @@ const Livre = require('../../model/livre');
 class DAOAndroid{
     constructor(){
         this._client = new Client({
-            connectionString: 'postgres://sonnois:Bonjour@192.168.1.26:5432/biblio'
+            connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
             // connectionString: process.ENV.DATABASE_URL
         });
         this._client.connect(function (err) {
@@ -37,21 +37,28 @@ class DAOAndroid{
         });
 
     };
-    getLivreById(id,cb){
+    getLivreAllLivreTitre(cb){
         const query={
-            name:'fetch-livre-by-id',
-            text:'select * from livre where code =$1',
-            values:[id]
+            name:'fetch-livre-all-livre-titre',
+            text:'select titre from livre'
         }
-        this._client.query(query, function (err,result) {
-            if(err){
+        this._client.query(query, function(err, result){
+            let lesLivres = [];
+            if (err) {
                 console.log(err.stack);
-            }else{
-                let leLivre = new Livre(id, result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
-                cb(leLivre)
+            } else {
+                let i = 0;
+                result.rows.forEach(function(row) {
+                    let unLivre = new Livre(result.rows[i]['idLivre'], result.rows[i]['titre']);
+                    lesLivres.push(unLivre);
+                    i++;
+                });
+
+                cb(lesLivres);
+
             }
 
-        })
+        });
     }
 }
 

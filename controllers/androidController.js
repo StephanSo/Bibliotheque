@@ -5,7 +5,7 @@ const androidDAOpg = new DAOAndroid();
 exports.index = function (req,res,next) {
     androidDAOpg.getAllLivres(function(lesLivres) {
         let test =JSON.stringify(lesLivres);
-        res.render('android/androidrecup', {title: 'liste des livres', listLivre: test});
+        res.send(test);
     });
 
 }
