@@ -1,0 +1,10 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            h3 Voici l'exemplaire numero #{lexemplaire.numero} du livre #{livre.titre}
+            h4 Statut: #{lexemplaire.statut}
+            if(lexemplaire.statut==='Emprunté')
+                h4 Emprunté par: #{lecteur.nom} #{lecteur.prenom}
+                h4 Et doit être rendu au maximum le: #{lexemplaire.dateRetour}

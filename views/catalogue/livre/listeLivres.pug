@@ -4,6 +4,14 @@ block content
     .container
         .jumbotron
             h1 Voici la #{title}
-            ul
-                each livre in listLivre
-                    li= livre.titre
+            table.table.table-condensed.table-responsive
+                thead
+                    tr
+                        th Titre
+                        th Detail
+                tbody
+                    each livre in listLivre
+                        tr
+                            td= livre.titre
+                            td
+                                a(href='/catalogue/livre/livreDetail/' + livre.idLivre)    Afficher detaill

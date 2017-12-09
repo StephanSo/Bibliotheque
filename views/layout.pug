@@ -11,7 +11,12 @@ html
           a.navbar-brand(href='/') Bibliothèque
         ul.nav.navbar-nav
           li.active
+            a(href='/') Accueil
+          li
             a(href="/catalogue/livre") Catalogue
+          if(role==="bibliothécaire")
+              li
+                a(href="/catalogue/livre") Ajouter des Livres
         if(!user)
           .navbar-header.pull-right
             ul.nav.navbar-nav

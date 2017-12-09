@@ -1,0 +1,27 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            h1 Voici la liste des exemplaire du livre #{listeExemplaire.livre}
+            table.table.table-condensed.table-responsive
+                thead
+                    tr
+                        th Numéro
+                        th Statut
+                        th Date de retour prévue
+                tbody
+                    each exemplaire in listeExemplaire
+                        if(exemplaire.statut === 'Emprunté')
+                            tr.danger
+                                td= exemplaire.numero
+                                td= exemplaire.statut
+                                td= exemplaire.dateRetour
+                                if(role==='bibliothécaire')
+                                    td
+                                        a(href='exemplaire/'+exemplaire.numero+'') Afficher les details de cet exemplaire
+                        else
+                            tr
+                                td= exemplaire.numero
+                                td= exemplaire.statut
+                                td= exemplaire.dateRetour

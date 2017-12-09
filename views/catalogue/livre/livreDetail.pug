@@ -1,8 +1,11 @@
 extends ../../layout
 
 block content
-    .jumbotron
-        p Voici le livre numéro #{id}
+    .container
+        .jumbotron
+            p Voici le livre numéro #{id}
             p #{unLivre.titre}
             p #{unLivre.resume}
             p Ecrit par #{unAuteur.nom} #{unAuteur.prenom}
+
+            a(href='/catalogue/livre/livredetail/'+id+'/exemplaire') Voir les exemplaires pour ce livre
