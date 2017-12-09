@@ -3,5 +3,23 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
   body
-    block content
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='/') Bibliothèque
+        ul.nav.navbar-nav
+          li.active
+            a(href="/catalogue/livre") Catalogue
+        .navbar-header.pull-right
+          ul.nav.navbar-nav
+            li
+              a.nav.navbar-nav(href="/login") Se Connecter
+            li
+              a.nav.navbar-nav(href="/register") S'enregistrer
+
+  block content
+
+  footer.navbar-fixed-bottom.navbar-inverse
+    p tout droit réservé

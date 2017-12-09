@@ -1,6 +1,8 @@
 extends ../../layout
 
 block content
-    p Voici le livre numéro #{id}
-        p #{unLivre.titre}
-        p Ecrit par #{unAuteur.nom} #{unAuteur.prenom   }
+    .jumbotron
+        p Voici le livre numéro #{id}
+            p #{unLivre.titre}
+            p #{unLivre.resume}
+            p Ecrit par #{unAuteur.nom} #{unAuteur.prenom}

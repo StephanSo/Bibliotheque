@@ -1,7 +1,9 @@
 extends ../../layout
 
 block content
-    h1 Voici la #{title}
-    ul
-        each livre in listLivre
-            li= livre.titre
+    .container
+        .jumbotron
+            h1 Voici la #{title}
+            ul
+                each livre in listLivre
+                    li= livre.titre
