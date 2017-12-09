@@ -12,12 +12,19 @@ html
         ul.nav.navbar-nav
           li.active
             a(href="/catalogue/livre") Catalogue
-        .navbar-header.pull-right
-          ul.nav.navbar-nav
-            li
-              a.nav.navbar-nav(href="/login") Se Connecter
-            li
-              a.nav.navbar-nav(href="/register") S'enregistrer
+        if(!user)
+          .navbar-header.pull-right
+            ul.nav.navbar-nav
+              li
+                a.nav.navbar-nav(href="/login") Se Connecter
+              li
+                a.nav.navbar-nav(href="/register") S'enregistrer
+        else
+          .navbar-header.pull-right
+            ul.nav.navbar-nav
+              li
+                a.nav.navbar-nav(href="/login/logout") Se Déconnecter
+
 
   block content
 

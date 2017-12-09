@@ -6,7 +6,9 @@ const auteurDAOpg = new AuteurDAOpg();
 exports.listLivre = function (req,res,next) {
     livreDAOpg.getAllLivres(
         function(lesLivres) {
-            res.render('catalogue/livre/listeLivres', {title:'liste des livres', listLivre:lesLivres});
+            console.log(req.session);
+            res.render('catalogue/livre/listeLivres', {title:'liste des livres', listLivre:lesLivres,user:req.session.user, role:req.session.role});
+
         });
     };
 exports.livreById = function (req, res, next) {
@@ -15,7 +17,7 @@ exports.livreById = function (req, res, next) {
         function (leLivre) {
         auteurDAOpg.getAuteurByIdLivre(id,
             function (lAuteur) {
-                res.render('catalogue/livre/livreDetail',{id, unLivre:leLivre, unAuteur: lAuteur})
+                res.render('catalogue/livre/livreDetail',{id, unLivre:leLivre, unAuteur: lAuteur,user:req.session.user, role:req.session.role})
             })
 
 
