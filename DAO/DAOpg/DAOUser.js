@@ -36,8 +36,34 @@ class DAOUser{
         })
 
     }
+    checkRole(username,cb){
+        const query = {
+            name:'fetch-role-by-username',
+            text:'select count(*) from "user" u inner join lecteur l on l.idlecteur = u."idUser" where username = $1',
+            values: [username]
+        };
+        this._client.query(query, function(err,result){
+            let role="";
+            if(err){
+                console.log(err.stack);
+            }else{
+
+                result.rows.forEach(function () {
+                    if(result.rows[0]['count'] == 1){
+                        role="Lecteur";
+                    }
+                    else{
+                        role="bibliothécaire";
+                    }
+                });
+                cb(role);
+            }
+
+        });
+    }
     loginUser(usernameP, passwordP, cb) {
-        let userC ="ko";
+        let userC;
+
         this.getUser(function (listUsers) {
                 let i =0;
 
@@ -47,7 +73,6 @@ class DAOUser{
                         if(passwordP ===listUsers[i]._password){
                             console.log('CONNEXION');
                             userC="ok";
-
 
                         }else{
                             console.log('nonOk');
@@ -61,9 +86,11 @@ class DAOUser{
                     i++;
                 }
 
+
                 cb(userC)
             }
         );
     }
+
 }
 module.exports = DAOUser;

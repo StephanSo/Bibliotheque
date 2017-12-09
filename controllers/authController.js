@@ -12,9 +12,13 @@ exports.login_authentication = function(req, res) {
     daoUser.loginUser(username, password, function (okpasok) {
         console.log(okpasok);
         if(okpasok==="ok"){
-            req.session.user=username;
-            console.log(req.session);
-            res.render('index', {user:req.session.user, role:req.session.role});
+            daoUser.checkRole(username,function (leRole) {
+                req.session.user=username;
+                req.session.role=leRole;
+                console.log(req.session);
+                res.render('index', {user:req.session.user, role:req.session.role});
+            });
+
         }
         else{
             res.render('login/login');
