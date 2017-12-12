@@ -1,14 +1,29 @@
 const {Client} = require('pg');
 const Auteur = require('../../model/auteur');
 
-class LivreDAOpg{
+class AuteurDAOpg{
     constructor(){
         this._client = new Client({
-            connectionString: 'postgres://sonnois:Bonjour@192.168.1.26:5432/biblio'
+            connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
             // connectionString: process.ENV.DATABASE_URL
         });
         this._client.connect(function (err) {
             if(err) return done(err);
+        })
+    }
+    getAuteurByNom(auteur, cb){
+        const query={
+            name:'fetch-auteur-by-nom',
+            text:'select auteur."idAuteur" from auteur where nom=$1',
+            values:[auteur]
+        };
+        this._client.query(query,function (err,result) {
+            if(err){
+                console.log(err.stack);
+            }else{
+                let lAuteur = new Auteur(result.rows[0]['idAuteur']);
+                cb(lAuteur);
+            }
         })
     }
     getAuteurByIdLivre(id,cb){
@@ -27,8 +42,29 @@ class LivreDAOpg{
 
         })
     }
+    getAllAuteur(cb){
+        const query={
+            name:'fetch-all-auteur',
+            text:'select * from auteur',
+        };
+        this._client.query(query, function (err,result) {
+            let lesAuteurs = [];
+            if(err){
+                console.log(err.stack);
+            }else{
+                let i = 0;
+                result.rows.forEach(function() {
+                    let lAuteur = new Auteur(result.rows[i]['idAuteur'], result.rows[i]['nom'], result.rows[i]['prenom'], result.rows[i]['dateDeNaissance'], result.rows[i]['dateDeDeces']);
+                    lesAuteurs.push(lAuteur);
+                    i++;
+                });
+                cb(lesAuteurs);
+            }
+
+        })
+    }
 
 
 }
 
-module.exports = LivreDAOpg;
+module.exports = AuteurDAOpg;

@@ -1,0 +1,67 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            if(role!=='bibliothécaire')
+                h1 VOUS N'AVEZ PAS ACCES A CA
+            else
+                if(erreur)
+                    h3.alert.alert-danger #{erreur}
+                    h4 Ajouter un livre au catalogue
+                        form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                            h7.form-group Titre du Livre:
+                                input.form-control(type='text' name='titre')
+                            h7.form-group Resumé:
+                                textarea.form-control(name='resume' rows='4' cols='40')
+                            h7.form-group ISBN (13):
+                                input.form-control(type='text' name='isbn')
+                            h7.form-group Auteur:
+                                select.form-control(name='auteur')
+                                    each auteur in listAuteur
+                                        option #{auteur.nom}
+                            h7.form-group Genre:
+                                select.form-control(name='genre')
+                                    each genre in listGenre
+                                        option #{genre.libelle}
+
+                            input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
+                else if(valid)
+                    h3.alert.alert-success #{valid}
+                        h4 Ajouter un livre au catalogue
+                            form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                                h7.form-group Titre du Livre:
+                                    input.form-control(type='text' name='titre')
+                                h7.form-group Resumé:
+                                    textarea.form-control(name='resume' rows='4' cols='40')
+                                h7.form-group ISBN (13):
+                                    input.form-control(type='text' name='isbn')
+                                h7.form-group Auteur:
+                                    select.form-control(name='auteur')
+                                        each auteur in listAuteur
+                                            option #{auteur.nom}
+                                h7.form-group Genre:
+                                    select.form-control(name='genre')
+                                        each genre in listGenre
+                                            option #{genre.libelle}
+
+                                input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
+                else
+                    h4 Ajouter un livre au catalogue
+                        form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                            h7.form-group Titre du Livre:
+                                input.form-control(type='text' name='titre')
+                            h7.form-group Resumé:
+                                textarea.form-control(name='resume' rows='4' cols='40')
+                            h7.form-group ISBN (13):
+                                input.form-control(type='text' name='isbn')
+                            h7.form-group Auteur:
+                                select.form-control(name='auteur')
+                                    each auteur in listAuteur
+                                        option #{auteur.nom}
+                            h7.form-group Genre:
+                                select.form-control(name='genre')
+                                    each genre in listGenre
+                                        option #{genre.libelle}
+
+                            input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')

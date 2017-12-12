@@ -4,7 +4,7 @@ const Users = require('../../model/user');
 class DAOUser{
     constructor(){
         this._client = new Client({
-            connectionString : 'postgres://sonnois:Bonjour@192.168.1.26:5432/biblio'
+            connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
             // connectionString : process.ENV.DATABASE_URL
         });
 
