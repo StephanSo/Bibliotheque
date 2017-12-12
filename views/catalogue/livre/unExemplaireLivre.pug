@@ -7,4 +7,4 @@ block content
             h4 Statut: #{lexemplaire.statut}
             if(lexemplaire.statut==='Emprunté')
                 h4 Emprunté par: #{lecteur.nom} #{lecteur.prenom}
-                h4 Et doit être rendu au maximum le: #{lexemplaire.dateRetour}
+                h4 Et doit être rendu au maximum le: #{lexemplaire.dateRetour.getDay()} / #{lexemplaire.dateRetour.getMonth()} / #{lexemplaire.dateRetour.getFullYear()}

@@ -16,7 +16,7 @@ block content
                             tr.danger
                                 td= exemplaire.numero
                                 td= exemplaire.statut
-                                td= exemplaire.dateRetour
+                                td  #{exemplaire.dateRetour.getDay()} / #{exemplaire.dateRetour.getMonth()} / #{exemplaire.dateRetour.getFullYear()}
                                 if(role==='bibliothécaire')
                                     td
                                         a(href='exemplaire/'+exemplaire.numero+'') Afficher les details de cet exemplaire
