@@ -120,5 +120,34 @@ exports.ajoutLivre = function (req,res,next){
     });
 };
 
+exports.affichePageAddExemplaire = function (req, res, next) {
+    livreDAOpg.getAllLivres(function (lesLivres) {
+        res.render('catalogue/livre/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role});
+    })
+};
+
+exports.ajoutExemplaire = function (req, res, next) {
+    titre = req.body.livre;
+    nombreE = req.body.nombre;
+    let valid;
+    livreDAOpg.getAllLivres(function (lesLivres) {
+
+
+      livreDAOpg.getLivreIdByTitre(titre, function (leLivre) {
+            livreDAOpg.ajoutExemplaire(leLivre.idLivre, nombreE, function (verification) {
+                if(verification=='erreur'){
+                    valid='Les exemplaires se sont mal ajoutés';
+                    res.render('catalogue/livre/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, unLivre:leLivre, nombr:nombreE, erreur:valid})
+                }
+                else{
+                    valid='les exemplaires se sont correctement ajouter';
+                    res.render('catalogue/livre/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, unLivre:leLivre, nombr:nombreE, validation:valid})
+                }
+            })
+
+      })
+    });
+};
+
 
 

@@ -1,0 +1,52 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            if(role!=='bibliothécaire')
+                h1 VOUS N'AVEZ PAS ACCES A CA
+            else
+                if(erreur)
+                    h3.alert.alert-danger #{erreur}
+                    h4 Ajout d'exemplaire a un livre:
+                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                        h7.form-group Selectionner un Livre
+                            select.form-control(name='livre')
+                                each livre in listLivres
+                                    option #{livre.titre}
+                        h7.form-group Selectionner le nombre d'exemplaire à ajouter:
+                            select.form-control(name='nombre')
+                                - var i = 1;
+                                while i <= 50
+                                    option= i
+                                    - i++;
+                        input.btn.btn-default.btn-group-justified(type='submit' value='Ajouter un/des exemplaire(s)')
+                else if(validation)
+                    h3.alert.alert-success #{validation}
+                    h4 Ajout d'exemplaire a un livre:
+                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                        h7.form-group Selectionner un Livre
+                            select.form-control(name='livre')
+                                each livre in listLivres
+                                    option #{livre.titre}
+                        h7.form-group Selectionner le nombre d'exemplaire à ajouter:
+                            select.form-control(name='nombre')
+                                - var i = 1;
+                                while i <= 50
+                                    option= i
+                                    - i++;
+                        input.btn.btn-default.btn-group-justified(type='submit' value='Ajouter un/des exemplaire(s)')
+                else
+                    h4 Ajout d'exemplaire a un livre:
+                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                        h7.form-group Selectionner un Livre
+                            select.form-control(name='livre')
+                                each livre in listLivres
+                                    option #{livre.titre}
+                        h7.form-group Selectionner le nombre d'exemplaire à ajouter:
+                            select.form-control(name='nombre')
+                                - var i = 1;
+                                while i <= 50
+                                    option= i
+                                    - i++;
+                        input.btn.btn-default.btn-group-justified(type='submit' value='Ajouter un/des exemplaire(s)')

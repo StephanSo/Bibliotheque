@@ -103,6 +103,28 @@ class LivreDAOpg{
             cb(verifGenre);
         })
     }
+    ajoutExemplaire(idLivre,nombre, cb){
+        const query='select creerExemplaire(\'Libre\', null, $1, null)';
+        const values=[idLivre];
+        let ajoutverif;
+        let i = 0;
+        while(i < nombre){
+            this._client.query(query,values, function (err, result) {
+                if(err){
+                    console.log(err.stack);
+                    ajoutverif='erreur';
+                    cb(ajoutverif);
+                }
+                else{
+                    console.log(result.rows[0]);
+                    ajoutverif='ok'
+
+                }
+            })
+            i++;
+        }
+        cb('ok');
+    }
 
 }
 
