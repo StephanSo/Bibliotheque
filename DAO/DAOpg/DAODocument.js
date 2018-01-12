@@ -1,6 +1,7 @@
 const {Client} = require('pg');
 const Livre = require('../../model/livre');
 const Magazine = require('../../model/magazine');
+const Document = require('../../model/document');
 class DocumentDAOpg{
     constructor(){
         this._client = new Client({
@@ -12,12 +13,10 @@ class DocumentDAOpg{
         })
     }
     getAllDocument(displaycb){
-
         const query = {
             name: 'fetch-all-Document',
             text: 'select "idDocument",titre, resume, livre.isbn from document inner join livre on livre."idLivre" = document."idDocument" union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument";',
         };
-
         this._client.query(query, function(err, result){
             let lesDocuments = [];
             if (err) {
@@ -35,15 +34,32 @@ class DocumentDAOpg{
                     }
                     i++;
                 });
-
                 displaycb(lesDocuments);
-
+            }
+        });
+    };
+    getDocumentById(id,displayCB){
+        const query={
+            name:'fetch-doc-by-id',
+            text:'select "idDocument",titre, resume, livre.isbn from document inner join livre on livre."idLivre" = document."idDocument" where "idDocument"=$1 union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument" where "idDocument"=$1;',
+            values:[id]
+        };
+        this._client.query(query, function (err,result) {
+            if(err){
+                console.log(err.stack);
+            }else{
+                if(result.rows[0]['isbn'].length===13) {
+                    let unDocument = new Livre(result.rows[0]['idDocument'], result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
+                    displayCB(unDocument);
+                }
+                else{
+                    let unDocument = new Magazine(result.rows[0]['idDocument'], result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
+                    displayCB(unDocument);
+                }
             }
 
-        });
-
-    };
-
+        })
+    }
 
 }
 
