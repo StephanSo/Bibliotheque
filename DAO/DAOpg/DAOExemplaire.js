@@ -15,7 +15,7 @@ class ExemplaireDAOpg{
 
         const query = {
             name: 'fetch-all-exemplaire-by-id-documents',
-            text: 'SELECT * FROM exemplaire where documents =$1',
+            text: 'SELECT * FROM exemplaire where livre =$1',
             values:[id]
         };
 
