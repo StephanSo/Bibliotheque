@@ -9,7 +9,7 @@ block content
                 if(erreur)
                     h3.alert.alert-danger #{erreur}
                     h4 Ajouter un livre au catalogue
-                        form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                        form.form-horizontal(action="/catalogue/documents/addlivre", method="post")
                             h7.form-group Titre du Livre:
                                 input.form-control(type='text' name='titre')
                             h7.form-group Resumé:
@@ -29,7 +29,7 @@ block content
                 else if(valid)
                     h3.alert.alert-success #{valid}
                         h4 Ajouter un livre au catalogue
-                            form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                            form.form-horizontal(action="/catalogue/documents/addlivre", method="post")
                                 h7.form-group Titre du Livre:
                                     input.form-control(type='text' name='titre')
                                 h7.form-group Resumé:
@@ -48,7 +48,7 @@ block content
                                 input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
                 else
                     h4 Ajouter un livre au catalogue
-                        form.form-horizontal(action="/catalogue/livre/addlivre", method="post")
+                        form.form-horizontal(action="/catalogue/documents/addlivre", method="post")
                             h7.form-group Titre du Livre:
                                 input.form-control(type='text' name='titre')
                             h7.form-group Resumé:

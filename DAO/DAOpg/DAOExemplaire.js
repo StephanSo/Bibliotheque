@@ -14,8 +14,8 @@ class ExemplaireDAOpg{
     getAllExemplaireByIdLivre(id,displaycb){
 
         const query = {
-            name: 'fetch-all-exemplaire-by-id-livre',
-            text: 'SELECT * FROM exemplaire where livre =$1',
+            name: 'fetch-all-exemplaire-by-id-documents',
+            text: 'SELECT * FROM exemplaire where documents =$1',
             values:[id]
         };
 
@@ -40,8 +40,8 @@ class ExemplaireDAOpg{
     }
     getExemplaireByNumeroAndId(id, numero, cb){
         const query = {
-            name: 'fetch-all-exemplaire-by-id-livre-and-numero',
-            text: 'SELECT * FROM exemplaire where livre =$1 and numero = $2',
+            name: 'fetch-all-exemplaire-by-id-documents-and-numero',
+            text: 'SELECT * FROM exemplaire where documents =$1 and numero = $2',
             values:[id, numero]
         };
         this._client.query(query, function(err, result){

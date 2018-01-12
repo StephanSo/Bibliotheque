@@ -32,8 +32,8 @@ class LivreDAOpg{
     getAllLivres(displaycb){
 
         const query = {
-            name: 'fetch-all-livre',
-            text: 'select "idDocument",titre, resume, livre.isbn from document inner join livre on livre."idLivre" = document."idDocument" union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument";',
+            name: 'fetch-all-documents',
+            text: 'select "idDocument",titre, resume, documents.isbn from document inner join documents on documents."idLivre" = document."idDocument" union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument";',
         };
 
         this._client.query(query, function(err, result){
@@ -63,8 +63,8 @@ class LivreDAOpg{
     };
     getLivreById(id,cb){
         const query={
-            name:'fetch-livre-by-id',
-            text:'select * from livre where "idLivre" =$1',
+            name:'fetch-documents-by-id',
+            text:'select * from documents where "idLivre" =$1',
             values:[id]
         };
         this._client.query(query, function (err,result) {
@@ -80,7 +80,7 @@ class LivreDAOpg{
     getLivreIdByTitre(titre,cb){
         const query = {
             name:'fetch-livreid-by-titre',
-            text:'select livre."idLivre" from livre where titre=$1',
+            text:'select documents."idLivre" from documents where titre=$1',
             values:[titre]
         };
         this._client.query(query,function (err,result) {

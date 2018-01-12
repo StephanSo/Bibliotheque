@@ -14,7 +14,7 @@ class LecteurDAOpg{
 
     getLecteurById(id, cb){
         const query = {
-            name: 'fetch-all-exemplaire-by-id-livre-and-numero',
+            name: 'fetch-all-exemplaire-by-id-documents-and-numero',
             text: 'SELECT * FROM lecteur where idlecteur =$1',
             values:[id],
         };

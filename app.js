@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var livre = require('./routes/livre');
 var android = require('./routes/android');
 var login = require('./routes/users');
+var document = require('./routes/document');
 
 var app = express();
 
@@ -28,9 +29,10 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/catalogue/livre', livre);
+app.use('/catalogue/documents', livre);
 app.use('/android', android);
 app.use('/login', login);
+app.use('/catalogue/document',document);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

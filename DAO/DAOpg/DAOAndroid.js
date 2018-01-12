@@ -14,8 +14,8 @@ class DAOAndroid{
     getAllLivres(displaycb){
 
         const query = {
-            name: 'fetch-all-livre',
-            text: 'SELECT * FROM livre',
+            name: 'fetch-all-documents',
+            text: 'SELECT * FROM documents',
         };
 
         this._client.query(query, function(err, result){
@@ -39,8 +39,8 @@ class DAOAndroid{
     };
     getLivreAllLivreTitre(cb){
         const query={
-            name:'fetch-livre-all-livre-titre',
-            text:'select titre from livre'
+            name:'fetch-documents-all-documents-titre',
+            text:'select titre from documents'
         }
         this._client.query(query, function(err, result){
             let lesLivres = [];

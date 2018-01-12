@@ -29,7 +29,7 @@ class AuteurDAOpg{
     getAuteurByIdLivre(id,cb){
         const query={
             name:'fetch-auteur-by-idLivre',
-            text:'select auteur.* from auteur inner join livre on auteur."idAuteur" = livre.auteur where livre."idLivre"=$1',
+            text:'select auteur.* from auteur inner join documents on auteur."idAuteur" = documents.auteur where documents."idLivre"=$1',
             values:[id]
         }
         this._client.query(query, function (err,result) {

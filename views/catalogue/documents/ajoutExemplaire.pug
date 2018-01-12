@@ -9,7 +9,7 @@ block content
                 if(erreur)
                     h3.alert.alert-danger #{erreur}
                     h4 Ajout d'exemplaire a un livre:
-                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                    form.form-horizontal(action="/catalogue/documents/addExemplaire", method="post")
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres
@@ -24,7 +24,7 @@ block content
                 else if(validation)
                     h3.alert.alert-success #{validation}
                     h4 Ajout d'exemplaire a un livre:
-                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                    form.form-horizontal(action="/catalogue/documents/addExemplaire", method="post")
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres
@@ -38,7 +38,7 @@ block content
                         input.btn.btn-default.btn-group-justified(type='submit' value='Ajouter un/des exemplaire(s)')
                 else
                     h4 Ajout d'exemplaire a un livre:
-                    form.form-horizontal(action="/catalogue/livre/addExemplaire", method="post")
+                    form.form-horizontal(action="/catalogue/documents/addExemplaire", method="post")
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres

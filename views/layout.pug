@@ -13,12 +13,12 @@ html
           li.active
             a(href='/') Accueil
           li
-            a(href="/catalogue/livre") Catalogue
+            a(href="/catalogue/document") Catalogue
           if(role==="bibliothécaire")
               li
-                a(href="/catalogue/livre/addlivre") Ajouter des Livres
+                a(href="/catalogue/documents/addlivre") Ajouter des Livres
               li
-                a(href="/catalogue/livre/addExemplaire") Ajouter des Exemplaires
+                a(href="/catalogue/documents/addExemplaire") Ajouter des Exemplaires
         if(!user)
           .navbar-header.pull-right
             ul.nav.navbar-nav
