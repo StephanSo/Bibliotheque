@@ -1,12 +1,9 @@
-class Livre{
-    constructor(unIdLivre, unTitre, unResume,unIsbn){
-        this.idLivre = unIdLivre;
-        this.titre = unTitre;
-        this.resume = unResume;
+const Document =  require('../model/document');
+
+class Livre extends Document{
+    constructor(id, titre, resume,unIsbn){
+        super(id,titre,resume);
         this.isbn = unIsbn;
     }
-    // get titre(){
-    //     return this.titre;
-    // }
 }
 module.exports=Livre;

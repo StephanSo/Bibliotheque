@@ -1,6 +1,6 @@
 const {Client} = require('pg');
 const Livre = require('../../model/livre');
-
+const Magazine = require('../../model/magazine');
 class LivreDAOpg{
     constructor(){
         this._client = new Client({
@@ -33,22 +33,28 @@ class LivreDAOpg{
 
         const query = {
             name: 'fetch-all-livre',
-            text: 'SELECT * FROM livre',
+            text: 'select "idDocument",titre, resume, livre.isbn from document inner join livre on livre."idLivre" = document."idDocument" union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument";',
         };
 
         this._client.query(query, function(err, result){
-            let lesLivres = [];
+            let lesDocuments = [];
             if (err) {
                 console.log(err.stack);
             } else {
                 let i = 0;
                 result.rows.forEach(function(row) {
-                    let unLivre = new Livre(result.rows[i]['idLivre'], result.rows[i]['titre']);
-                    lesLivres.push(unLivre);
+                    if(result.rows[i]['isbn'].length===13) {
+                        let unDocument = new Livre(result.rows[i]['idDocument'], result.rows[i]['titre'], result.rows[i]['resume'], result.rows[i]['isbn']);
+                        lesDocuments.push(unDocument);
+                    }
+                    else{
+                        let unDocument = new Magazine(result.rows[i]['idDocument'], result.rows[i]['titre'], result.rows[i]['resume'], result.rows[i]['isbn'])
+                        lesDocuments.push(unDocument);
+                    }
                     i++;
                 });
 
-                displaycb(lesLivres);
+                displaycb(lesDocuments);
 
             }
 
