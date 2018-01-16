@@ -33,7 +33,7 @@ class LivreDAOpg{
 
         const query = {
             name: 'fetch-all-documents',
-            text: 'select "idDocument",titre, resume, documents.isbn from document inner join documents on documents."idLivre" = document."idDocument" union select "idDocument",titre, resume, magazine."ISSN" from document inner join magazine on magazine."idMagazine" = document."idDocument";',
+            text: 'select "idDocument",titre, resume, livre.isbn from document inner join livre on livre."idLivre" = document."idDocument";',
         };
 
         this._client.query(query, function(err, result){
@@ -43,14 +43,9 @@ class LivreDAOpg{
             } else {
                 let i = 0;
                 result.rows.forEach(function(row) {
-                    if(result.rows[i]['isbn'].length===13) {
                         let unDocument = new Livre(result.rows[i]['idDocument'], result.rows[i]['titre'], result.rows[i]['resume'], result.rows[i]['isbn']);
                         lesDocuments.push(unDocument);
-                    }
-                    else{
-                        let unDocument = new Magazine(result.rows[i]['idDocument'], result.rows[i]['titre'], result.rows[i]['resume'], result.rows[i]['isbn'])
-                        lesDocuments.push(unDocument);
-                    }
+
                     i++;
                 });
 
@@ -61,26 +56,26 @@ class LivreDAOpg{
         });
 
     };
-    getLivreById(id,cb){
-        const query={
-            name:'fetch-documents-by-id',
-            text:'select * from documents where "idLivre" =$1',
-            values:[id]
-        };
-        this._client.query(query, function (err,result) {
-            if(err){
-                console.log(err.stack);
-            }else{
-                let leLivre = new Livre(id, result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
-                cb(leLivre)
-            }
-
-        })
-    }
+    // getLivreById(id,cb){
+    //     const query={
+    //         name:'fetch-documents-by-id',
+    //         text:'select * from documents where "idLivre" =$1',
+    //         values:[id]
+    //     };
+    //     this._client.query(query, function (err,result) {
+    //         if(err){
+    //             console.log(err.stack);
+    //         }else{
+    //             let leLivre = new Livre(id, result.rows[0]['titre'], result.rows[0]['resume'], result.rows[0]['isbn']);
+    //             cb(leLivre)
+    //         }
+    //
+    //     })
+    // }
     getLivreIdByTitre(titre,cb){
         const query = {
             name:'fetch-livreid-by-titre',
-            text:'select documents."idLivre" from documents where titre=$1',
+            text:'select document."idDocument" from document where titre=$1',
             values:[titre]
         };
         this._client.query(query,function (err,result) {
@@ -88,14 +83,14 @@ class LivreDAOpg{
                 console.log(err.stack);
 
             }else{
-                let leLivre = new Livre(result.rows[0]['idLivre']);
+                let leLivre = new Livre(result.rows[0]['idDocument']);
                 cb(leLivre);
             }
         })
     }
     ajoutGenre(idLivre, idgenre,cb){
-        const query = 'select ajoutGenreLivre($1,$2)';
-        const values=[idLivre,idgenre];
+        const query = 'select ajoutGenreDocument($1,$2)';
+        const values=[idgenre,idLivre];
         let verifGenre;
         this._client.query(query,values, function (err, result) {
             if(err){

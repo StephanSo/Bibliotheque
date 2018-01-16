@@ -31,21 +31,21 @@ const genreDAOpg = new GenreDAOpg();
 //
 //     })
 // };
-exports.exemplaireByNumeroByLivreId = function (req, res , next) {
-    let id = req.params.id;
-    let numero = req.params.numero;
-    exemplaireDAOpg.getExemplaireByNumeroAndId(id, numero, function (lExemplaire) {
-        livreDAOpg.getLivreById(id, function (leLivre) {
-            lecteurDAOpg.getLecteurById(lExemplaire.lecteur, function (leLecteur) {
-                res.render('catalogue/documents/unExemplaireLivre',{lexemplaire: lExemplaire,livre:leLivre,lecteur:leLecteur, user: req.session.user,role: req.session.role});
-
-            })
-        })
-
-
-    })
-
-};
+// exports.exemplaireByNumeroByLivreId = function (req, res , next) {
+//     let id = req.params.id;
+//     let numero = req.params.numero;
+//     exemplaireDAOpg.getExemplaireByNumeroAndId(id, numero, function (lExemplaire) {
+//         livreDAOpg.getLivreById(id, function (leLivre) {
+//             lecteurDAOpg.getLecteurById(lExemplaire.lecteur, function (leLecteur) {
+//                 res.render('catalogue/documents/unExemplaireLivre',{lexemplaire: lExemplaire,livre:leLivre,lecteur:leLecteur, user: req.session.user,role: req.session.role});
+//
+//             })
+//         })
+//
+//
+//     })
+//
+// };
 exports.affichePageAddLivre = function (req,res,next) {
     auteurDAOpg.getAllAuteur(function (lesAuteurs) {
         genreDAOpg.getAllGenre(function (lesGenres) {
@@ -65,7 +65,7 @@ exports.ajoutLivre = function (req,res,next){
     genreDAOpg.getGenreByLibelle(genre, function (leGenre) {
         auteurDAOpg.getAuteurByNom(auteur, function (LAuteur) {
             livreDAOpg.ajoutLivre(titre,resume,isbn,LAuteur.idAuteur, function (verif) {
-                if(verif == 'erreur'){
+                if(verif === 'erreur'){
                     let Erreur = 'Le documents ne s\'est pas ajouter';
                     auteurDAOpg.getAllAuteur(function (lesAuteurs) {
                         genreDAOpg.getAllGenre(function (lesGenres) {
@@ -79,7 +79,7 @@ exports.ajoutLivre = function (req,res,next){
                 else{
                     livreDAOpg.getLivreIdByTitre(titre,function (lIdDuLivre) {
                         console.log('test',lIdDuLivre);
-                       livreDAOpg.ajoutGenre(lIdDuLivre.idLivre, leGenre.idGenre, function (verifGenre) {
+                       livreDAOpg.ajoutGenre(lIdDuLivre.idDocument, leGenre.idGenre, function (verifGenre) {
                             if(verifGenre=='erreur'){
                                 let ErreurGenre='Le Genre n\'as pas été ajouter correctement';
                                 auteurDAOpg.getAllAuteur(function (lesAuteurs) {
@@ -126,7 +126,7 @@ exports.ajoutExemplaire = function (req, res, next) {
 
 
       livreDAOpg.getLivreIdByTitre(titre, function (leLivre) {
-            livreDAOpg.ajoutExemplaire(leLivre.idLivre, nombreE, function (verification) {
+            livreDAOpg.ajoutExemplaire(leLivre.idDocument, nombreE, function (verification) {
                 if(verification=='erreur'){
                     valid='Les exemplaires se sont mal ajoutés';
                     res.render('catalogue/documents/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, unLivre:leLivre, nombr:nombreE, erreur:valid})
