@@ -9,28 +9,28 @@ const lecteurDAOpg = new LecteurDAOpg();
 const GenreDAOpg = require('../DAO/DAOpg/DAOGenre');
 const genreDAOpg = new GenreDAOpg();
 
-exports.livreById = function (req, res, next) {
-    let id = req.params.id;
-    livreDAOpg.getLivreById(id,
-        function (leLivre) {
-        auteurDAOpg.getAuteurByIdLivre(id,
-            function (lAuteur) {
-                res.render('catalogue/documents/livreDetail',{id, unLivre:leLivre, unAuteur: lAuteur,user:req.session.user, role:req.session.role})
-            })
-        });
-};
-exports.exemplaireBylivreId = function (req, res, next) {
-    let id = req.params.id;
-    exemplaireDAOpg.getAllExemplaireByIdLivre(id, function (lesExemplaire) {
-        console.log(req.session);
-        res.render('catalogue/documents/exemplaireLivre', {
-            listeExemplaire: lesExemplaire,
-            user: req.session.user,
-            role: req.session.role
-        });
-
-    })
-};
+// exports.livreById = function (req, res, next) {
+//     let id = req.params.id;
+//     livreDAOpg.getLivreById(id,
+//         function (leLivre) {
+//         auteurDAOpg.getAuteurByIdLivre(id,
+//             function (lAuteur) {
+//                 res.render('catalogue/documents/livreDetail',{id, unLivre:leLivre, unAuteur: lAuteur,user:req.session.user, role:req.session.role})
+//             })
+//         });
+// };
+// exports.exemplaireBylivreId = function (req, res, next) {
+//     let id = req.params.id;
+//     exemplaireDAOpg.getAllExemplaireByIdLivre(id, function (lesExemplaire) {
+//         console.log(req.session);
+//         res.render('catalogue/documents/exemplaireLivre', {
+//             listeExemplaire: lesExemplaire,
+//             user: req.session.user,
+//             role: req.session.role
+//         });
+//
+//     })
+// };
 exports.exemplaireByNumeroByLivreId = function (req, res , next) {
     let id = req.params.id;
     let numero = req.params.numero;

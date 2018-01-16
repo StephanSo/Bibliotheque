@@ -14,8 +14,8 @@ class LecteurDAOpg{
 
     getLecteurById(id, cb){
         const query = {
-            name: 'fetch-all-exemplaire-by-id-documents-and-numero',
-            text: 'SELECT * FROM lecteur where idlecteur =$1',
+            name: 'fetch-all-lecteur-by-id',
+            text: 'select * from "user" inner join lecteur on "user"."idUser"= lecteur.idlecteur where idlecteur=$1',
             values:[id],
         };
         this._client.query(query, function(err, result){
@@ -23,7 +23,7 @@ class LecteurDAOpg{
                 console.log(err.stack);
             } else {
                 result.rows.forEach(function() {
-                    let unLecteur = new Lecteur(result.rows[0]['idLecteur'],result.rows[0]['nom'],result.rows[0]['prenom']);
+                    let unLecteur = new Lecteur(result.rows[0]['idLecteur'],null,null,result.rows[0]['nom'],result.rows[0]['prenom'],result.rows[0]['dateDeNaissance'],result.rows[0]['dateDePremiereadhesion'],result.rows[0]['dateFinAdhesion']);
                     cb(unLecteur);
                 });
 

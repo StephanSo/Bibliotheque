@@ -4,6 +4,8 @@ const AuteurDAOpg = require('../DAO/DAOpg/DAOAuteur');
 const auteurDAOpg = new AuteurDAOpg();
 const ExemplaireDAOpg = require('../DAO/DAOpg/DAOExemplaire');
 const exemplaireDAOpg = new ExemplaireDAOpg();
+const LecteurDAOpg = require('../DAO/DAOpg/DAOLecteur');
+const lecteurDAOpg = new LecteurDAOpg();
 
 exports.listDoc = function (req,res,next) {
     documentDAOpg.getAllDocument(
@@ -53,3 +55,17 @@ exports.exemplaireByDocId = function (req, res, next) {
         });
 };
 
+exports.exemplaireByNumeroByLivreId = function (req, res, next) {
+    let id = req.params.id;
+    let numero = req.params.numero;
+    exemplaireDAOpg.getExemplaireByNumeroAndId(id, numero, function (lExemplaire) {
+        documentDAOpg.getDocumentById(id, function (leLivre) {
+            lecteurDAOpg.getLecteurById(lExemplaire.lecteur, function (leLecteur) {
+                res.render('catalogue/documents/unExemplaireLivre',{lexemplaire: lExemplaire,livre:leLivre,lecteur:leLecteur, user: req.session.user,role: req.session.role});
+
+            })
+        })
+
+
+    })
+};

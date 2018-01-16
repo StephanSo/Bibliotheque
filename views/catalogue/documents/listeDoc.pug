@@ -1,0 +1,17 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            h1 Voici la #{title}
+            table.table.table-condensed.table-responsive
+                thead
+                    tr
+                        th Titre
+                        th Detail
+                tbody
+                    each doc in listdoc
+                        tr
+                            td= doc.titre
+                            td
+                                a(href='/catalogue/document/documentDetail/' + doc.idDocument)    Afficher detaill
