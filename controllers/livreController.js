@@ -62,11 +62,9 @@ exports.ajoutLivre = function (req,res,next){
     isbn = req.body.isbn;
     auteur= req.body.auteur;
     genre= req.body.genre;
-    genreDAOpg.getGenreByLibelle(genre, function (leGenre) {
-        auteurDAOpg.getAuteurByNom(auteur, function (LAuteur) {
-            livreDAOpg.ajoutLivre(titre,resume,isbn,LAuteur.idAuteur, function (verif) {
+            livreDAOpg.ajoutLivre(titre,resume,isbn,auteur, function (verif) {
                 if(verif === 'erreur'){
-                    let Erreur = 'Le documents ne s\'est pas ajouter';
+                    let Erreur = 'Le document ne s\'est pas ajouté';
                     auteurDAOpg.getAllAuteur(function (lesAuteurs) {
                         genreDAOpg.getAllGenre(function (lesGenres) {
 
@@ -79,7 +77,7 @@ exports.ajoutLivre = function (req,res,next){
                 else{
                     livreDAOpg.getLivreIdByTitre(titre,function (lIdDuLivre) {
                         console.log('test',lIdDuLivre);
-                       livreDAOpg.ajoutGenre(lIdDuLivre.idDocument, leGenre.idGenre, function (verifGenre) {
+                       livreDAOpg.ajoutGenre(lIdDuLivre.idDocument, genre, function (verifGenre) {
                             if(verifGenre=='erreur'){
                                 let ErreurGenre='Le Genre n\'as pas été ajouter correctement';
                                 auteurDAOpg.getAllAuteur(function (lesAuteurs) {
@@ -107,9 +105,6 @@ exports.ajoutLivre = function (req,res,next){
 
                 }
             });
-
-        });
-    });
 };
 
 exports.affichePageAddExemplaire = function (req, res, next) {
@@ -119,25 +114,22 @@ exports.affichePageAddExemplaire = function (req, res, next) {
 };
 
 exports.ajoutExemplaire = function (req, res, next) {
-    titre = req.body.livre;
+    idLivre = req.body.livre;
     nombreE = req.body.nombre;
     let valid;
     livreDAOpg.getAllLivres(function (lesLivres) {
-
-
-      livreDAOpg.getLivreIdByTitre(titre, function (leLivre) {
-            livreDAOpg.ajoutExemplaire(leLivre.idDocument, nombreE, function (verification) {
+            livreDAOpg.ajoutExemplaire(idLivre, nombreE, function (verification) {
                 if(verification=='erreur'){
                     valid='Les exemplaires se sont mal ajoutés';
-                    res.render('catalogue/documents/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, unLivre:leLivre, nombr:nombreE, erreur:valid})
+                    res.render('catalogue/documents/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, nombr:nombreE, erreur:valid})
                 }
                 else{
                     valid='les exemplaires se sont correctement ajouter';
-                    res.render('catalogue/documents/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, unLivre:leLivre, nombr:nombreE, validation:valid})
+                    res.render('catalogue/documents/ajoutExemplaire',{listLivres:lesLivres,user: req.session.user,role: req.session.role, nombr:nombreE, validation:valid})
                 }
             })
 
-      })
+
     });
 };
 

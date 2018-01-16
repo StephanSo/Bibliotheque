@@ -13,7 +13,7 @@ block content
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres
-                                    option #{livre.titre}
+                                    option(value=''+livre.idDocument+'') #{livre.titre}
                         h7.form-group Selectionner le nombre d'exemplaire à ajouter:
                             select.form-control(name='nombre')
                                 - var i = 1;
@@ -28,7 +28,7 @@ block content
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres
-                                    option #{livre.titre}
+                                    option(value=''+livre.idDocument+'') #{livre.titre}
                         h7.form-group Selectionner le nombre d'exemplaire à ajouter:
                             select.form-control(name='nombre')
                                 - var i = 1;
@@ -42,7 +42,7 @@ block content
                         h7.form-group Selectionner un Livre
                             select.form-control(name='livre')
                                 each livre in listLivres
-                                    option #{livre.titre}
+                                    option(value=''+livre.idDocument+'') #{livre.titre}
                         h7.form-group Selectionner le nombre d'exemplaire à ajouter:
                             select.form-control(name='nombre')
                                 - var i = 1;

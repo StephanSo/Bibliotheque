@@ -19,11 +19,11 @@ block content
                             h7.form-group Auteur:
                                 select.form-control(name='auteur')
                                     each auteur in listAuteur
-                                        option #{auteur.nom}
+                                        option(value=''+auteur.idAuteur+'') #{auteur.nom}
                             h7.form-group Genre:
                                 select.form-control(name='genre')
                                     each genre in listGenre
-                                        option #{genre.libelle}
+                                        option(value=''+genre.idGenre+'') #{genre.libelle}
 
                             input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
                 else if(valid)
@@ -39,11 +39,11 @@ block content
                                 h7.form-group Auteur:
                                     select.form-control(name='auteur')
                                         each auteur in listAuteur
-                                            option #{auteur.nom}
+                                            option(value=''+auteur.idAuteur+'') #{auteur.nom}
                                 h7.form-group Genre:
                                     select.form-control(name='genre')
                                         each genre in listGenre
-                                            option #{genre.libelle}
+                                            option(value=''+genre.idGenre+'') #{genre.libelle}
 
                                 input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
                 else
@@ -58,10 +58,10 @@ block content
                             h7.form-group Auteur:
                                 select.form-control(name='auteur')
                                     each auteur in listAuteur
-                                        option #{auteur.nom}
+                                        option(value=''+auteur.idAuteur+'') #{auteur.nom}
                             h7.form-group Genre:
                                 select.form-control(name='genre')
                                     each genre in listGenre
-                                        option #{genre.libelle}
+                                        option(value=''+genre.idGenre+'') #{genre.libelle}
 
                             input.btn.btn-default.btn-group-justified(type='submit' value='Enregistrer un nouveau Livre')
