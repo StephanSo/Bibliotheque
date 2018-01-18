@@ -331,6 +331,60 @@ execute procedure verifUser();
 /*****TP2*****/
 /*************/
 
+
+/******************************/
+/*     Schema relationnel     */
+/******************************/
+user(idUser,username,password,nom,prenom)
+	clé primaire: idUser
+
+bibliothecaire(idBibliothecaire)
+	clé primaire: idBibliothecaire
+	clé étrangère: idBibliothecaire en reférence à idUser de la table user
+
+lecteur(idLecteur, dateDeNaissance, datePremiereAdhesion, dateFinAdhesion)
+	clé primaire: idLecteur
+	Clé étrangère: idLecteur en reférence à idUser de la table user
+
+genre(idGenre, libelle)
+	clé primaire: idGenre
+
+document(idDocument, titre, resume)
+	clé primaire: idDocument
+
+appartenir(genre,document)
+	clé primaire: genre,document
+	clé étrangère: genre en référence à idGenre de la table genre
+					document en référence à idDocument de la table document
+
+auteur(idAuteur,nom,prenom,dateDeNaissance,dateDeDeces)
+	clé primaire: idAuteur
+
+livre(idLivre,isbn,auteur)
+	clé primaire: idLivre
+	clé candidate: isbn
+	clé étrangère: idLivre en référence à idDocument de la table document
+					auteur en référence à idAuteur de la table auteur
+
+exemplaire(numero,livre,statut,dateRetour,lecteur)
+	clé primaire: numero,livre
+	clé étrangère:livre en référence à idLivre de la table livre
+					lecteur en référence à idLecteur de la table lecteur
+
+magazine(idMagazine, ISSN)
+	clé primaire: idMagazine
+	clé candidate: ISSN
+	clé étrangère: idMagazine en référence à idDocument de la table document
+
+numeromagazine(numeroMagazine, magazine, titre, dateDeParution, statut, lecteur, dateRetourM)
+	clé primaire: numeroMagazine, magazine
+	clé étrangère: magazine en référence à idMagazine de la table magazine
+					lecteur en référence à idLecteur de la table lecteur
+
+/***************************/
+/***************************/
+/***************************/
+
 create table document(
 	"idDocument" int4 not null,
 	titre varchar not null,
