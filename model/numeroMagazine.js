@@ -2,12 +2,15 @@ class NumeroMagazine{
     constructor(unNumeroMagazine, unMagazine, unTitre, uneDateDePartution, unStatut, unLecteur, uneDateRetourM){
 
         this.numeroMagazine =  unNumeroMagazine;
-        this.magazine = unMagazine;
+        this._magazine = unMagazine;
         this.titre = unTitre;
         this.dateDeParution = uneDateDePartution;
         this.statut = unStatut;
         this.lecteur = unLecteur;
-        this.dateRetourM = uneDateRetour;
+        this.dateRetourM = uneDateRetourM;
+    }
+    get getMagazine(){
+        return this._magazine;
     }
 }
 module.exports=NumeroMagazine;

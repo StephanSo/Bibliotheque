@@ -1,5 +1,6 @@
 const {Client} = require('pg');
 const Magazine = require('../../model/magazine');
+const NumeroMagazine = require('../../model/numeroMagazine');
 
 class MagazineDAOpg {
     constructor() {
@@ -23,11 +24,13 @@ class MagazineDAOpg {
                 console.log(err.stack);
             }
             else{
+                let i =0;
                 result.rows.forEach(function() {
-                    let unNumero = new E(result.rows[i]['numero'],result.rows[i]['statut'],result.rows[i]['dateRetour'],result.rows[i]['livre'],result.rows[i]['lecteur']);
-                    lesExemplaire.push(unExemplaire);
+                    let unNumero = new NumeroMagazine(result.rows[i]['numeroMagazine'],result.rows[i]['magazine'],result.rows[i]['titre'],result.rows[i]['dateDeParution'],result.rows[i]['statut'],result.rows[i]['lecteur'], result.rows[i]['dateRetourM']);
+                    lesNumeros.push(unNumero);
                     i++;
                 });
+                cb(lesNumeros);
 
             }
 

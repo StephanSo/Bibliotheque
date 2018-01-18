@@ -67,6 +67,6 @@ exports.exemplaireByNumeroByLivreId = function (req, res, next) {
 exports.numeroMagazineByMagazineId = function (req, res, next){
   let id = req.params.id;
   magazineDAOpg.getLesNumerosByMagazineId(id,function (lesNumerosMagazine) {
-
+      res.render('catalogue/documents/numeroMagazine',{listeNumero: lesNumerosMagazine,leMag:id, user: req.session.user,role: req.session.role});
   });
 };

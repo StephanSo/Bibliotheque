@@ -1,0 +1,35 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            h1 Voici la liste des numeros du magazine #{leMag}
+            table.table.table-condensed.table-responsive
+                thead
+                    tr
+                        th Numéro
+                        th Statut
+                        th Titre
+                        th Date de parution
+                        th Date de retour prévue
+                        if(role==='bibliothécaire')
+                            th Detail
+                tbody
+                    each numero in listeNumero
+                        if(numero.statut === 'Emprunté')
+                            tr.danger
+                                td= numero.numeroMagazine
+                                td= numero.statut
+                                td= numero.titre
+                                td  #{numero.dateDeParution.getDay()} / #{numero.dateDeParution.getMonth()} / #{numero.dateDeParution.getFullYear()}
+                                td  #{numero.dateRetourM.getDay()} / #{numero.dateRetourM.getMonth()} / #{numero.dateRetourM.getFullYear()}
+                                if(role==='bibliothécaire')
+                                    td
+                                        a(href='numero/'+numero.numeroMagazine+'') Afficher les details de cet exemplaire
+                        else
+                            tr
+                                td= numero.numeroMagazine
+                                td= numero.statut
+                                td= numero.titre
+                                td #{numero.dateDeParution.getDay()} / #{numero.dateDeParution.getMonth()} / #{numero.dateDeParution.getFullYear()}
+                                td= numero.dateRetourM
