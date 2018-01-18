@@ -1,0 +1,10 @@
+extends ../../layout
+
+block content
+    .container
+        .jumbotron
+            h3 Voici l'exemplaire numero #{leNum} du magazine #{leMag}
+            h4 Statut: #{leNumero.statut}
+            if(leNumero.statut==='Emprunté')
+                h4 Emprunté par: #{lecteur.nom} #{lecteur.prenom}
+                h4 Et doit être rendu au maximum le: #{leNumero.dateRetourM.getDay()} / #{leNumero.dateRetourM.getMonth()} / #{leNumero.dateRetourM.getFullYear()}

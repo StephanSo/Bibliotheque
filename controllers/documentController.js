@@ -8,6 +8,7 @@ const LecteurDAOpg = require('../DAO/DAOpg/DAOLecteur');
 const lecteurDAOpg = new LecteurDAOpg();
 const MagazineDAOpg = require('../DAO/DAOpg/DAOMagazine');
 const magazineDAOpg = new MagazineDAOpg();
+const NumeroMagazine = require('../model/numeroMagazine');
 
 exports.listDoc = function (req,res,next) {
     documentDAOpg.getAllDocument(
@@ -70,3 +71,27 @@ exports.numeroMagazineByMagazineId = function (req, res, next){
       res.render('catalogue/documents/numeroMagazine',{listeNumero: lesNumerosMagazine,leMag:id, user: req.session.user,role: req.session.role});
   });
 };
+exports.detailNumeroMagazineByNumero =  function (req,res,next) {
+    let id = req.params.id;
+    let numero = req.params.numero;
+    magazineDAOpg.getLesNumerosByMagazineId(id,function (lesNumerosMagazine) {
+        lesNumerosMagazine.forEach(function (i) {
+           if(i.numeroMagazine === parseInt(numero,10)){
+               lecteurDAOpg.getLecteurById(i.lecteur, function (leLecteur) {
+                   res.render('catalogue/documents/detailNumeroMagazine', {
+                       leNumero: i,
+                       leNum: numero,
+                       lecteur:leLecteur,
+                       leMag: id,
+                       user: req.session.user,
+                       role: req.session.role
+                   })
+               });
+           }
+        });
+
+
+
+    })
+
+}
