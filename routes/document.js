@@ -6,4 +6,5 @@ router.get('/', documentController.listDoc);
 router.get('/documentDetail/:id', documentController.documentById);
 router.get('/documentDetail/:id/exemplaire', documentController.exemplaireByDocId);
 router.get('/documentDetail/:id/exemplaire/:numero', documentController.exemplaireByNumeroByLivreId);
+router.get('/documentDetail/:id/numero', documentController.numeroMagazineByMagazineId);
 module.exports = router;
