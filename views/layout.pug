@@ -24,6 +24,7 @@ html
             ul.nav.navbar-nav
               li
                 a.nav.navbar-nav(href="/login") Se Connecter
+                  span.glyphicon.glyphicon-user
               li
                 a.nav.navbar-nav(href="/register") S'enregistrer
         else
@@ -33,7 +34,10 @@ html
                 a.nav.navbar-nav(href="/login/logout") Se Déconnecter
 
 
-  block content
+    block content
 
-  footer.navbar-fixed-bottom.navbar-inverse
-    p tout droit réservé
+    footer.navbar-fixed-bottom.navbar-inverse
+      p tout droit réservé
+
+    script(src="script/bootstrap.js")
+    script(src="script/jquery-3.2.1.js")
