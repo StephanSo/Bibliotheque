@@ -5,7 +5,7 @@ const Document = require('../../model/document');
 class DocumentDAOpg{
     constructor(){
         this._client = new Client({
-            connectionString: 'postgres://sonnois:sonnois@192.168.222.86:5432/biblio'
+            connectionString: 'postgres://sonnois:Bonjour@192.168.1.34:5432/biblio'
             // connectionString: process.ENV.DATABASE_URL
         });
         this._client.connect(function (err) {
